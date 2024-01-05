@@ -1,0 +1,18 @@
+
+This:
+http://computoser.com/
+http://computoser.com/track/5226
+http://computoser.com/track/5611
+
+
+midi
+https://random-music-generators.herokuapp.com/melody
+
+-------------------------------------
+sfxr (original):
+http://www.drpetter.se/project_sfxr.html
+
+Javascript sfxr:
+https://sfxr.me/
+w!
+

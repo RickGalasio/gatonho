@@ -1,50 +1,63 @@
 extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var gatonho = $"."
-@onready var fall_time: Timer = $fall_time
-@onready var coyote_time: Timer = $coyote_time
 
-const SPEED = 70.0
+const SPEED = 4000.0
 const JUMP_VELOCITY = -300.0
+const COYOTE_VEL_MAX = 179.666656494141
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction:float
-var velmax:float=0.0
+var death:bool=false
+var velmax:float=500.0
+var jump_count:int=0
+var max_jumps:int=1
+@onready var init_pos:Vector2=gatonho.position
 #==========================================================
 func _ready() -> void:
-	fall_time.wait_time=0.60
-
+	pass
 #==========================================================
 func player_input():
+	
+	if Input.is_key_pressed(KEY_ESCAPE): get_tree().quit()
+	if Input.is_action_just_released("F11"):
+		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else:
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	if Input.is_action_just_released("reset"):
+		anim.play("idle")
+		death=false
+		gatonho.position=init_pos
+		
 	if anim.get("animation") != "fall":
-		if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-			velocity.y = JUMP_VELOCITY 
+		if Input.is_action_just_pressed("ui_accept") and velocity.y<COYOTE_VEL_MAX and jump_count<max_jumps:
+			velocity.y = JUMP_VELOCITY
+			jump_count+=1 
 		if Input.is_action_just_released("ui_accept") and !is_on_floor():
 			velocity.y *= 0.5
+			
 		direction = Input.get_axis("ui_left", "ui_right")
-		
-		if direction:
-			velocity.x = direction * SPEED
-			if direction>0:
-				anim.flip_h=false
-			if direction<0:
-				anim.flip_h=true
-		else:
-			velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	if Input.is_key_pressed(KEY_ESCAPE):
-		get_tree().quit()
 #==========================================================
 func _physics_process(delta):
+	if direction:
+		velocity.x = direction * SPEED * delta
+		if velocity.y>velmax: death=true
+		if direction>0:
+			anim.flip_h=false
+		if direction<0:
+			anim.flip_h=true
+	else:
+		velocity.x = 0 #move_toward(velocity.x, 0, SPEED)
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
-	else:
-		if not fall_time.is_stopped():
-			fall_time.stop()
-		
-	if velocity.y>0 and !is_on_floor():
-		if fall_time.is_stopped():
-			fall_time.start()
+		print("vel:"+str(velocity.y))
+
+	if is_on_floor():
+		jump_count=0
+		if death:
+			anim.play("fall")
 	
 	player_input()
 
@@ -55,7 +68,4 @@ func _physics_process(delta):
 			anim.play("idle")
 
 	move_and_slide()
-
-func _on_fall_time_timeout() -> void:
-	anim.play("fall")
-
+	
