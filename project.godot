@@ -19,12 +19,10 @@ config/icon="res://icon.svg"
 
 window/size/viewport_width=320
 window/size/viewport_height=180
-window/size/initial_position_type=0
-window/size/initial_position=Vector2i(0, 360)
+window/size/initial_position_type=3
 window/energy_saving/keep_screen_on=false
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale_mode="integer"
 
 [input]
 

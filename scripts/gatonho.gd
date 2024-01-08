@@ -1,8 +1,10 @@
 extends CharacterBody2D
 @onready var anim = $AnimatedSprite2D
 @onready var gatonho = $"."
+@onready var remote: RemoteTransform2D = $remote_camera
+@onready var camera: Camera2D = $"../../Camera2D"
 
-const SPEED = 4000.0
+const SPEED = 6000.0
 const JUMP_VELOCITY = -300.0
 const COYOTE_VEL_MAX = 179.666656494141
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -12,12 +14,22 @@ var velmax:float=500.0
 var jump_count:int=0
 var max_jumps:int=1
 @onready var init_pos:Vector2=gatonho.position
+
+#==========================================================
+func reset() -> void:
+	anim.play("hurt")
+	#await anim.animation_finished
+	await get_tree().create_timer(2.0).timeout
+	anim.play("idle")
+	death=false
+	gatonho.position=init_pos
 #==========================================================
 func _ready() -> void:
-	pass
+	# Set the camera
+	remote.remote_path=camera.get_path()
+
 #==========================================================
-func player_input():
-	
+func player_input() -> void:
 	if Input.is_key_pressed(KEY_ESCAPE): get_tree().quit()
 	if Input.is_action_just_released("F11"):
 		if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_WINDOWED:
@@ -25,9 +37,8 @@ func player_input():
 		else:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	if Input.is_action_just_released("reset"):
-		anim.play("idle")
-		death=false
-		gatonho.position=init_pos
+		reset()
+
 		
 	if anim.get("animation") != "fall":
 		if Input.is_action_just_pressed("ui_accept") and velocity.y<COYOTE_VEL_MAX and jump_count<max_jumps:
@@ -35,11 +46,10 @@ func player_input():
 			jump_count+=1 
 		if Input.is_action_just_released("ui_accept") and !is_on_floor():
 			velocity.y *= 0.5
-			
 		direction = Input.get_axis("ui_left", "ui_right")
 
 #==========================================================
-func _physics_process(delta):
+func _physics_process(delta) -> void:
 	if direction:
 		velocity.x = direction * SPEED * delta
 		if velocity.y>velmax: death=true
@@ -66,6 +76,4 @@ func _physics_process(delta):
 			anim.play("walk")
 		else:
 			anim.play("idle")
-
 	move_and_slide()
-	
