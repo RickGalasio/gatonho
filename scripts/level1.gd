@@ -6,8 +6,8 @@ extends TileMap
 var ispike
 func _ready() -> void:
 	await level_1.draw # Await draw the tiles
-	for x in get_used_cells(0):
-		print("Cell:"+str(x))
+	#for x in get_used_cells(0):
+		#print("Cell:"+str(x))
 
 	for i in get_used_cells_by_id(0,1):
 		print("Tile")
