@@ -15,6 +15,9 @@ var death:bool=false
 var velmax:float=500.0
 var jump_count:int=0
 
+const DASH:float=0.2
+var dash_time:float=0.0
+
 var last_vel:float=123.0
 var jump_buffer:float=0.0
 @onready var init_pos:Vector2=position
@@ -34,7 +37,8 @@ func set_death() -> void:
 	death=true
 #==========================================================
 func _ready() -> void:
-	info.hide()
+	info.show()
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	# Set the camera
 	remote.remote_path=camera.get_path()
 
@@ -44,8 +48,11 @@ func _physics_process(delta) -> void:
 			#print("Velocidade terminal")
 			#death=true
 			set_death()
-	if velocity==Vector2(0,0) and not death:
+	if velocity==Vector2.ZERO and not death:
 		init_pos=position
+		
+	if velocity.x!=0 and not death:
+		info.hide()
 		
 	if direction:
 		velocity.x = direction * SPEED * delta
@@ -56,6 +63,16 @@ func _physics_process(delta) -> void:
 			anim.flip_h=true
 	else:
 		velocity.x = 0 #move_toward(velocity.x, 0, SPEED)
+	
+	if dash_time>0:
+		if anim.flip_h:
+			velocity.x = SPEED * delta * -3
+		else:
+			velocity.x = SPEED * delta * 3
+		velocity.y=lerp(velocity.y,0.0,1)
+		
+		
+		
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -71,6 +88,11 @@ func _physics_process(delta) -> void:
 	if Input.is_action_just_released("reset"): reset()
 	
 	if anim.get("animation") != "fall":
+		if Input.is_action_just_pressed("dash") and not is_on_floor():
+			print("dash")
+			dash_time=DASH
+		dash_time-=delta
+		if dash_time<0: dash_time=0
 		if Input.is_action_just_pressed("ui_accept"): 
 			jump_buffer=0.1
 		jump_buffer-=delta

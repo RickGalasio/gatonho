@@ -180,13 +180,14 @@ debug_color = Color(0.623529, 0, 0.694118, 0.419608)
 
 [node name="info" type="RichTextLabel" parent="."]
 offset_left = -34.0
-offset_top = -36.0
+offset_top = -56.0
 offset_right = 40.0
 offset_bottom = -8.0
 theme_override_fonts/normal_font = ExtResource("3_gghn1")
 theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
-text = "Press: R - respawn
+text = "Press: R - Respawn
 ESC -  exit
-F - FullSxreen
-"
+F11 - FullScreen
+C-Dash
+A,D,ARROWS - Move"
