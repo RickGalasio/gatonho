@@ -51,10 +51,12 @@ texture = ExtResource("1_xxlbs")
 0:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:4/0/physics_layer_0/angular_velocity = 0.0
 0:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, 4, -8, 4)
+0:4/0/physics_layer_0/polygon_0/one_way = true
 1:4/0 = 0
 1:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:4/0/physics_layer_0/angular_velocity = 0.0
 1:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -4, 8, -4, 8, 0, -8, 0)
+1:4/0/physics_layer_0/polygon_0/one_way = true
 2:4/0 = 0
 2:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:4/0/physics_layer_0/angular_velocity = 0.0
@@ -150,3 +152,7 @@ texture = SubResource("NoiseTexture2D_uu4f1")
 [node name="houses" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
 texture_repeat = 2
 texture = ExtResource("4_82a2t")
+
+[node name="gaveta" type="Timer" parent="."]
+
+[connection signal="timeout" from="gaveta" to="." method="_on_gaveta_timeout"]

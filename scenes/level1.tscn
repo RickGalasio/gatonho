@@ -29,4 +29,12 @@ drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 
+[node name="CanvasModulate" type="CanvasModulate" parent="Camera2D"]
+position = Vector2(43, 176)
+
+[node name="Label" type="Label" parent="Camera2D/CanvasModulate"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "XXXXXXX"
+
 [connection signal="area_entered" from="fase/Sprite2D" to="fase/Sprite2D/world_limits" method="_on_sprite_2d_area_entered"]

@@ -191,3 +191,5 @@ ESC -  exit
 F11 - FullScreen
 C-Dash
 A,D,ARROWS - Move"
+
+[connection signal="body_entered" from="area_gatonho" to="." method="_on_area_gatonho_body_entered"]

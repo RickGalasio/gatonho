@@ -24,9 +24,6 @@ var jump_buffer:float=0.0
 
 #==========================================================
 func reset() -> void:
-	
-	#anim.play("hurt")
-	#await anim.animation_finished
 	#await get_tree().create_timer(2.0).timeout
 	info.hide()
 	anim.play("idle")
@@ -69,10 +66,10 @@ func _physics_process(delta) -> void:
 			velocity.x = SPEED * delta * -3
 		else:
 			velocity.x = SPEED * delta * 3
-		velocity.y=lerp(velocity.y,0.0,1)
-		
-		
-		
+		if Input.is_action_pressed("ui_up"):
+			velocity.y=SPEED * delta*-1
+		else:
+			velocity.y=lerp(velocity.y,0.0,1)
 
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -102,6 +99,7 @@ func _physics_process(delta) -> void:
 		if Input.is_action_just_released("ui_accept") and !is_on_floor():
 			velocity.y *= 0.5
 		direction = Input.get_axis("ui_left", "ui_right")
+		if Input.is_action_just_pressed("ui_down"): position.y=position.y+1
 
 # Animation ======================================================		
 	if is_on_floor():
@@ -117,3 +115,7 @@ func _physics_process(delta) -> void:
 			anim.play("idle")
 	last_vel=velocity.y
 	move_and_slide()
+
+func _on_area_gatonho_body_entered(body: Node2D) -> void:
+	print("Body:"+str(body.name))
+	pass # Replace with function body.
