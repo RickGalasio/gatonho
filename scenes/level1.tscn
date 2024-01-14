@@ -12,6 +12,7 @@
 script = ExtResource("1_cspt5")
 
 [node name="Gatonho" parent="fase" instance=ExtResource("5_0g5ys")]
+unique_name_in_owner = true
 
 [node name="Sprite2D" type="Area2D" parent="fase"]
 
