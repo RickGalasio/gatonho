@@ -203,7 +203,7 @@ bbcode_enabled = true
 text = "Press: R - Respawn
 ESC -  exit
 F11 - FullScreen
-C-Dash
+C-Dash V-Glider
 A,D,ARROWS - Move"
 
 [node name="glider_bar" type="Sprite2D" parent="."]

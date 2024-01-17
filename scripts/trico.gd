@@ -1,14 +1,22 @@
 extends Node2D
-@onready var trico: CharacterBody2D = $trico
-@onready var coli: CollisionShape2D = $CharacterBody2D/coli
-@onready var anim: AnimatedSprite2D = $CharacterBody2D/anim
-@onready var player: CharacterBody2D = %Gatonho
+#@onready var trico: CharacterBody2D = $trico
+@onready var trico: Sprite2D = $trico
 
-func _physics_process(delta: float) -> void:
-	#if position.x>player.position.x:
-		#anim.flip_h=true
-	#else:
-		#anim.flip_h=false
-	pass
+@onready var coli: CollisionShape2D = $trico/coli
+@onready var anim: AnimatedSprite2D = $trico/anim
+@onready var fala: RichTextLabel = $fala
 
-func _ready() -> void: pass
+func trico_flip(flip:bool)->void:
+	anim.flip_h=flip
+	
+func _ready() -> void: 
+	fala.visible=false
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	#if area.name=="gatonho":
+	fala.visible=true
+
+func _on_area_2d_area_exited(area: Area2D) -> void:
+	#if area.name=="gatonho":
+	fala.visible=false
+
