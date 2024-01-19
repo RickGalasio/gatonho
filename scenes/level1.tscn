@@ -1,12 +1,56 @@
-[gd_scene load_steps=5 format=3 uid="uid://b7pbq0i4d4a7u"]
+[gd_scene load_steps=6 format=3 uid="uid://b7pbq0i4d4a7u"]
 
 [ext_resource type="Script" path="res://scripts/load_fase.gd" id="1_cspt5"]
+[ext_resource type="Texture2D" uid="uid://ltd3q8tuwwas" path="res://img/cantos.png" id="2_uebg4"]
 [ext_resource type="PackedScene" uid="uid://cfvdjyg0dkr8u" path="res://scenes/gatonho.tscn" id="5_0g5ys"]
 [ext_resource type="Script" path="res://scripts/world_limits.gd" id="6_esv14"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tdl3q"]
 
 [node name="world" type="Node"]
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="screen" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="lives" type="HBoxContainer" parent="HUD/screen"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -50.0
+offset_bottom = 17.0
+grow_horizontal = 0
+
+[node name="dialog_box" type="NinePatchRect" parent="HUD/screen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.025375
+anchor_top = 0.666222
+anchor_right = 0.974625
+anchor_bottom = 0.977333
+offset_left = -0.120001
+offset_top = 0.079998
+offset_right = 0.119995
+offset_bottom = 0.0799866
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_uebg4")
+region_rect = Rect2(0, 0, 32.0235, 31.6466)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="fase" type="Node2D" parent="."]
 script = ExtResource("1_cspt5")
@@ -29,13 +73,5 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
-
-[node name="CanvasModulate" type="CanvasModulate" parent="Camera2D"]
-position = Vector2(43, 176)
-
-[node name="Label" type="Label" parent="Camera2D/CanvasModulate"]
-offset_right = 40.0
-offset_bottom = 23.0
-text = "XXXXXXX"
 
 [connection signal="area_entered" from="fase/Sprite2D" to="fase/Sprite2D/world_limits" method="_on_sprite_2d_area_entered"]

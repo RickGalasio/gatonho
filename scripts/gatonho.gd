@@ -4,6 +4,7 @@ extends CharacterBody2D
 @onready var camera: Camera2D = $"../../Camera2D"
 @onready var info: RichTextLabel = $info
 @onready var glider_bar: Sprite2D = $glider_bar
+@onready var init_pos:Vector2=position
 
 const SPEED = 6000.0
 const JUMP_VELOCITY = -300.0
@@ -28,7 +29,7 @@ var GLIDER_BAR_FRAMES:int=0
 
 var last_vel:float=123.0
 var jump_buffer:float=0.0
-@onready var init_pos:Vector2=position
+var swin:bool = false
 
 #==========================================================
 func reset() -> void:
@@ -41,6 +42,11 @@ func reset() -> void:
 #==========================================================
 func set_death() -> void:
 	death=true
+
+#==========================================================
+func set_swin() -> void:
+	swin=true
+	anim.play("swin")
 
 #==========================================================
 func _ready() -> void:
@@ -172,5 +178,5 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _on_area_gatonho_body_entered(body: Node2D) -> void:
-	#print("Body:"+str(body.name))
+	print("Body:"+str(body.get_index(true)))
 	pass

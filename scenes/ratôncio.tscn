@@ -1,0 +1,63 @@
+[gd_scene load_steps=9 format=3 uid="uid://dh6f5rw70elhb"]
+
+[ext_resource type="Script" path="res://scripts/ratôncio.gd" id="1_4i6ds"]
+[ext_resource type="Texture2D" uid="uid://d1m46qsjf1sci" path="res://img/Ratôncio.png" id="2_kec8q"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_os76n"]
+size = Vector2(16, 17)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fgnwt"]
+atlas = ExtResource("2_kec8q")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uyvif"]
+atlas = ExtResource("2_kec8q")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jo78t"]
+atlas = ExtResource("2_kec8q")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ti1jf"]
+atlas = ExtResource("2_kec8q")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h5x6h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fgnwt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uyvif")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jo78t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ti1jf")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[node name="ratôncio" type="Node2D"]
+
+[node name="ratôncio" type="CharacterBody2D" parent="."]
+script = ExtResource("1_4i6ds")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ratôncio"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_os76n")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="ratôncio"]
+sprite_frames = SubResource("SpriteFrames_h5x6h")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.796454

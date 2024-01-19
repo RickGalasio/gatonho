@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cfvdjyg0dkr8u"]
+[gd_scene load_steps=29 format=3 uid="uid://cfvdjyg0dkr8u"]
 
 [ext_resource type="Script" path="res://scripts/gatonho.gd" id="1_ncbrx"]
 [ext_resource type="Texture2D" uid="uid://cnw74x0ula4y4" path="res://img/gatonho_sheet.png" id="2_t7pi2"]
@@ -56,6 +56,14 @@ region = Rect2(32, 0, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_amkxr"]
 atlas = ExtResource("2_t7pi2")
 region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_387br"]
+atlas = ExtResource("2_t7pi2")
+region = Rect2(0, 80, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iojy0"]
+atlas = ExtResource("2_t7pi2")
+region = Rect2(16, 80, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsacv"]
 atlas = ExtResource("2_t7pi2")
@@ -144,6 +152,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_387br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iojy0")
+}],
+"loop": true,
+"name": &"swin",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_xsacv")
 }, {
 "duration": 1.0,
@@ -180,8 +199,9 @@ shape = SubResource("RectangleShape2D_lvh21")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_b8dhk")
-animation = &"glider"
+animation = &"swin"
 autoplay = "idle"
+frame_progress = 0.00504557
 
 [node name="remote_camera" type="RemoteTransform2D" parent="."]
 
@@ -193,6 +213,7 @@ shape = SubResource("RectangleShape2D_i8im5")
 debug_color = Color(0.623529, 0, 0.694118, 0.419608)
 
 [node name="info" type="RichTextLabel" parent="."]
+z_index = 25
 offset_left = -34.0
 offset_top = -56.0
 offset_right = 40.0
