@@ -61,3 +61,6 @@ sprite_frames = SubResource("SpriteFrames_h5x6h")
 animation = &"idle"
 autoplay = "idle"
 frame_progress = 0.796454
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-1, -2)

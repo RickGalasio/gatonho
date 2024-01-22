@@ -1,8 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://bywg7ltpcgxsk"]
+[gd_scene load_steps=11 format=3 uid="uid://bywg7ltpcgxsk"]
 
 [ext_resource type="Texture2D" uid="uid://c6wp6brynldat" path="res://img/trico.png" id="1_0daok"]
 [ext_resource type="Script" path="res://scripts/trico.gd" id="1_px8we"]
-[ext_resource type="FontFile" uid="uid://be8r8cl5bovx" path="res://fonts/clacon.ttf" id="3_s7e3c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rpq3a"]
 atlas = ExtResource("1_0daok")
@@ -73,18 +72,6 @@ autoplay = "default"
 position = Vector2(-0.5, 0)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_eklmb")
-
-[node name="fala" type="RichTextLabel" parent="."]
-texture_filter = 1
-offset_left = -23.0
-offset_top = -30.0
-offset_right = 24.0
-offset_bottom = -10.0
-theme_override_fonts/normal_font = ExtResource("3_s7e3c")
-theme_override_font_sizes/normal_font_size = 10
-bbcode_enabled = true
-text = "Oi Gatonho!
-Quer café?"
 
 [connection signal="area_entered" from="trico/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="trico/Area2D" to="." method="_on_area_2d_area_exited"]

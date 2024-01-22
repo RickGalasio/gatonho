@@ -1,15 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://b7pbq0i4d4a7u"]
+[gd_scene load_steps=11 format=3 uid="uid://b7pbq0i4d4a7u"]
 
+[ext_resource type="Script" path="res://scripts/HUD.gd" id="1_582wg"]
 [ext_resource type="Script" path="res://scripts/load_fase.gd" id="1_cspt5"]
 [ext_resource type="Texture2D" uid="uid://ltd3q8tuwwas" path="res://img/cantos.png" id="2_uebg4"]
-[ext_resource type="PackedScene" uid="uid://cfvdjyg0dkr8u" path="res://scenes/gatonho.tscn" id="5_0g5ys"]
+[ext_resource type="Texture2D" uid="uid://cnw74x0ula4y4" path="res://img/gatonho_sheet.png" id="3_q20x2"]
+[ext_resource type="Texture2D" uid="uid://d1m46qsjf1sci" path="res://img/Ratôncio.png" id="3_t1d7d"]
+[ext_resource type="Texture2D" uid="uid://c6ixqrfa4gmmv" path="res://img/bobble.png" id="4_fw4td"]
+[ext_resource type="FontFile" uid="uid://be8r8cl5bovx" path="res://fonts/clacon.ttf" id="5_jj0eq"]
 [ext_resource type="Script" path="res://scripts/world_limits.gd" id="6_esv14"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_14o5o"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_tdl3q"]
 
 [node name="world" type="Node"]
 
 [node name="HUD" type="CanvasLayer" parent="."]
+script = ExtResource("1_582wg")
 
 [node name="screen" type="Control" parent="HUD"]
 layout_mode = 3
@@ -30,6 +37,7 @@ offset_bottom = 17.0
 grow_horizontal = 0
 
 [node name="dialog_box" type="NinePatchRect" parent="HUD/screen"]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.025375
@@ -52,11 +60,79 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 metadata/_edit_use_anchors_ = true
 
+[node name="player" type="Panel" parent="HUD/screen/dialog_box"]
+material = SubResource("CanvasItemMaterial_14o5o")
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.0
+offset_top = -20.0
+offset_right = 48.0
+offset_bottom = 20.0
+grow_vertical = 2
+
+[node name="player_sprite" type="Sprite2D" parent="HUD/screen/dialog_box/player"]
+position = Vector2(19.3417, 20.0001)
+scale = Vector2(2.7631, 2.5)
+texture = ExtResource("3_q20x2")
+region_enabled = true
+region_rect = Rect2(-0.00298691, -0.271763, 14.459, 16.8913)
+
+[node name="player_booble" type="Sprite2D" parent="HUD/screen/dialog_box/player"]
+position = Vector2(44, 20)
+scale = Vector2(2, 2.5)
+texture = ExtResource("4_fw4td")
+region_enabled = true
+region_rect = Rect2(4, 0, 4, 16)
+
+[node name="friend" type="Panel" parent="HUD/screen/dialog_box"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -48.0
+offset_top = -19.9999
+offset_right = -8.0
+offset_bottom = 20.0001
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="friend_sprite" type="Sprite2D" parent="HUD/screen/dialog_box/friend"]
+position = Vector2(20, 20)
+scale = Vector2(2.5, 2.45)
+texture = ExtResource("3_t1d7d")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16.0002)
+
+[node name="friend_booble" type="Sprite2D" parent="HUD/screen/dialog_box/friend"]
+position = Vector2(-4, 20)
+scale = Vector2(2, 2.5)
+texture = ExtResource("4_fw4td")
+region_enabled = true
+region_rect = Rect2(0, 0, 4, 16)
+
+[node name="text" type="RichTextLabel" parent="HUD/screen/dialog_box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -96.0
+offset_top = -20.0
+offset_right = 96.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("5_jj0eq")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+
 [node name="fase" type="Node2D" parent="."]
 script = ExtResource("1_cspt5")
-
-[node name="Gatonho" parent="fase" instance=ExtResource("5_0g5ys")]
-unique_name_in_owner = true
 
 [node name="Sprite2D" type="Area2D" parent="fase"]
 
@@ -73,5 +149,9 @@ drag_horizontal_enabled = true
 drag_vertical_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+
+[node name="Bobble" type="Sprite2D" parent="."]
+position = Vector2(256, 152)
+texture = ExtResource("4_fw4td")
 
 [connection signal="area_entered" from="fase/Sprite2D" to="fase/Sprite2D/world_limits" method="_on_sprite_2d_area_entered"]
