@@ -8,7 +8,8 @@ var input_status = {
 	"death": 2,
 }
 var input_enable:int=1
-
+var death:bool=false
+var dialog_end:bool=true
 var gamestate=["menu","pause","dialog","fase","bossfight"]
 var portait = {
 		"tricao": {"res":"res://img/trico.png", "x":0, "y":0, "w":16, "h":16},

@@ -15,31 +15,46 @@ var portait = {
 		"": "",
 	}
 
-#func _ready() -> void:
-	#print("region:"+str(player_sprite.region_rect))
-	#pass
+var ini_texto:String = ""
+var txtposition:int=0
+const MAX_TXT_TIME:float = 0.01
+var txt_time:float=MAX_TXT_TIME
 
 func set_dialog_friend(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
+	Global.dialog_end=false
 	Global.set_input_status("dialog")
-	text.text="[right]"+txt
+	txtposition=7 # avoid the [right]
+	text.text=""
+	ini_texto="[right]"+txt
 	dialog_box.show()
 	player_booble.hide()
 	friend_booble.show()
 	var friend_attr=portait[friend_name]
 	friend_sprite.texture=load(friend_attr["res"])
 	friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-	
+
 func set_dialog_player(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
+	Global.dialog_end=false
 	Global.set_input_status("dialog")
-	text.text="[left]"+txt
+	txtposition=6 # avoid the [left]
+	text.text=""
+	ini_texto="[left]"+txt
 	dialog_box.show()
 	player_booble.show()
 	friend_booble.hide()
 	var friend_attr=portait[friend_name]
-	friend_sprite.texture=friend_attr["res"]
+	friend_sprite.texture=load(friend_attr["res"])
 	friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
 
-#func _process(delta: float) -> void:
-	#pass
+func _process(delta:float) -> void:
+	if dialog_box.visible:
+		txt_time-=delta
+		if txt_time<=0.0: 
+			txt_time=MAX_TXT_TIME
+			if text.text.length()<ini_texto.length()+1:
+				text.text=ini_texto.substr(0,txtposition)
+				txtposition+=1
+			else:
+				Global.dialog_end=true

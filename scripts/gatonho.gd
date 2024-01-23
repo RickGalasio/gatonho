@@ -17,7 +17,7 @@ var max_jumps:int=1
 var max_dashs:int=1
 
 var direction:float
-var death:bool=false
+#var death:bool=false
 var velmax:float=500.0
 
 const DASH:float=0.2
@@ -37,12 +37,12 @@ func reset() -> void:
 	#await get_tree().create_timer(2.0).timeout
 	info.hide()
 	anim.play("idle")
-	death=false
+	Global.death=false
 	position=init_pos+Vector2(0,-1)
 
 #==========================================================
 func set_death() -> void:
-	death=true
+	Global.death=true
 
 #==========================================================
 func set_swin() -> void:
@@ -51,10 +51,12 @@ func set_swin() -> void:
 
 #==========================================================
 func _ready() -> void:
+	#print("XXXXXX")
+	#print("node:"+str(get_node(".").get_path()) )
 	#Calculate the number of frames in glider_bar (44)
 	#GLIDER_BAR_FRAMES=glider_bar.texture.get_size().x/int(glider_bar.region_rect.size.x)
 	GLIDER_BAR_FRAMES=44
-	print("GLIDER_BAR_FRAMES:"+str(GLIDER_BAR_FRAMES))
+	#print("GLIDER_BAR_FRAMES:"+str(GLIDER_BAR_FRAMES))
 	info.show()
 	glider_bar.show()
 	glider_bar.region_rect=Rect2(0,0,32,8)
@@ -113,10 +115,10 @@ func _physics_process(delta) -> void:
 	if last_vel>velmax and velocity.y==0: set_death()
 
 	# Save CheckPoint
-	if velocity==Vector2.ZERO and not death: init_pos=position
+	if velocity==Vector2.ZERO and not Global.death: init_pos=position
 	
 	# Hide instructions
-	if velocity.x!=0 and not death: info.hide()
+	if velocity.x!=0 and not Global.death: info.hide()
 		
 	if direction: 
 		velocity.x = direction * SPEED * delta
@@ -145,7 +147,7 @@ func _physics_process(delta) -> void:
 			if glider_frame>GLIDER_BAR_FRAMES:
 				disable_glider=true
 				glider_frame=0
-			death=false
+			Global.death=false
 			velocity.y = (gravity * delta)/8
 			if anim.flip_h:
 				velocity.x=-1*SPEED*delta
@@ -169,7 +171,7 @@ func _physics_process(delta) -> void:
 # Animation ======================================================		
 	if is_on_floor():
 		jump_count=0
-		if death:
+		if Global.death:
 			anim.play("fall")
 			info.show()
 			velocity=Vector2i.ZERO
@@ -188,4 +190,5 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _on_area_gatonho_body_entered(body: Node2D) -> void:
-	print("Body:"+str(body.get_index(true)))
+	#print("Body:"+str(body.get_index(true)))
+	pass

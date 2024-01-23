@@ -43,9 +43,9 @@ region = Rect2(112, 80, 16, 16)
 atlas = ExtResource("1_4kfrb")
 region = Rect2(128, 80, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5svre"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_iti0y"]
 atlas = ExtResource("1_4kfrb")
-region = Rect2(96, 80, 16, 16)
+region = Rect2(80, 80, 16, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_66d3a"]
 animations = [{
@@ -86,7 +86,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5svre")
+"texture": SubResource("AtlasTexture_iti0y")
 }],
 "loop": true,
 "name": &"static",
@@ -106,12 +106,11 @@ constant_linear_velocity = Vector2(16, 16)
 sprite_frames = SubResource("SpriteFrames_66d3a")
 animation = &"static"
 autoplay = "mov"
-frame_progress = 0.850319
+frame_progress = 0.466733
 
 [node name="area_pike" type="Area2D" parent="."]
 
 [node name="hit" type="CollisionShape2D" parent="area_pike"]
-visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_bgw4j")
 debug_color = Color(0.792157, 0, 0.254902, 0.419608)

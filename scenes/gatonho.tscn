@@ -221,11 +221,11 @@ offset_bottom = -8.0
 theme_override_fonts/normal_font = ExtResource("3_gghn1")
 theme_override_font_sizes/normal_font_size = 10
 bbcode_enabled = true
-text = "Press: R - Respawn
-ESC -  exit
-F11 - FullScreen
+text = "Press: ESC-exit
+R-Respawn
+F11-FullScreen 
 C-Dash V-Glider
-A,D,ARROWS - Move"
+A,D,ARROWS-Move"
 
 [node name="glider_bar" type="Sprite2D" parent="."]
 position = Vector2(0, -27)

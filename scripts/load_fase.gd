@@ -6,6 +6,4 @@ func _ready() -> void:
 	var bfase = load("res://scenes/level_"+str(level)+".tscn").instantiate()
 	bfase.z_index=-1 # Draw before player
 	add_child(bfase) 
-	#await gatonho.draw
-	
 	
