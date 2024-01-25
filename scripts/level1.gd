@@ -48,6 +48,6 @@ func _on_gaveta_timeout() -> void:
 
 func dialogo_deprimido(area: Area2D) -> void:
 	hud.set_dialog_friend("Não chega perto Gatoncio!\nEu já decidi...","ratoncio")
-	
+
 	hud.set_dialog_player("Não é Gatôncio, é Gatonho!","ratoncio")
 

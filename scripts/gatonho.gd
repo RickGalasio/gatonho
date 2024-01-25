@@ -102,6 +102,9 @@ func input_player(delta:float)->void:
 			direction = Input.get_axis("ui_left", "ui_right")
 	else:
 		if Input.is_action_just_pressed("ui_accept"):
+			Global.dialog_idx+=1
+			var idialog=Global.dialogs[Global.dialog_idx]
+			print(idialog)
 			Global.set_input_status("plataform")
 		direction = 0
 		velocity = Vector2i.ZERO
