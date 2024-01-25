@@ -131,6 +131,15 @@ theme_override_fonts/normal_font = ExtResource("5_jj0eq")
 theme_override_font_sizes/normal_font_size = 15
 bbcode_enabled = true
 
+[node name="trabalho" type="ColorRect" parent="HUD/screen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
 [node name="fase" type="Node2D" parent="."]
 script = ExtResource("1_cspt5")
 

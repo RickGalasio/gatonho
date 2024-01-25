@@ -60,8 +60,8 @@ func _ready() -> void:
 	info.show()
 	glider_bar.show()
 	glider_bar.region_rect=Rect2(0,0,32,8)
-	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	
+	#DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	# Set the camera
 	remote.remote_path=camera.get_path()
 	
@@ -103,8 +103,8 @@ func input_player(delta:float)->void:
 	else:
 		if Input.is_action_just_pressed("ui_accept"):
 			Global.dialog_idx+=1
-			var idialog=Global.dialogs[Global.dialog_idx]
-			print(idialog)
+			#var idialog=Global.dialogs[Global.dialog_idx]
+			#print(idialog)
 			Global.set_input_status("plataform")
 		direction = 0
 		velocity = Vector2i.ZERO

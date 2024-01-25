@@ -55,22 +55,16 @@ func _process(delta:float) -> void:
 		txt_time-=delta
 		if txt_time<=0.0: 
 			txt_time=MAX_TXT_TIME
+			print("dialog_idx:"+str(Global.dialog_idx))
 			var act_dilogs = Global.dialogs[Global.dialog_idx]
 			var itxt = act_dilogs[1]
-
-			#if act_dilogs[0]=="player":
-				#txtposition=6
-			#else:
-				#txtposition=7 # avoid the [right]
-
-			if text.text.length()<itxt.length()+1:
-				text.text=itxt.substr(0,txtposition)
+			print("Item("+str(Global.dialog_idx)+"):"+str(Global.dialogs[Global.dialog_idx]))
+			#if text.text.length()<ini_texto.length()+1:
+			if txtposition<ini_texto.length()+1:
+				text.text=ini_texto.substr(0,txtposition)
+				print(str(ini_texto.substr(0,txtposition))+":"+str(txtposition)+"/"+str(ini_texto.length()+1))
 				txtposition+=1
 			else:
-				Global.dialog_end=true
-				
-			#if text.text.length()<ini_texto.length()+1:
-				#text.text=ini_texto.substr(0,txtposition)
-				#txtposition+=1
-			#else:
-				#Global.dialog_end=true
+				print("dialogs:"+str(Global.dialogs.size()))
+				if Global.dialog_idx+1<Global.dialogs.size():
+					Global.dialog_idx+=1
