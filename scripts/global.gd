@@ -7,8 +7,10 @@ var input_status = {
 }
 var input_enable:int=1
 var death:bool=false
-var dialog_end:bool=false
 var gamestate=["menu","pause","dialog","fase","bossfight"]
+
+# Dialogos
+var dialog_end:bool=false
 var dialogs:Array
 var dialog_idx:int=0
 
