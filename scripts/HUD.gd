@@ -34,7 +34,7 @@ func set_dialog_friend(txt:String, friend_name:String) -> void:
 	#friend_sprite.texture=load(friend_attr["res"])
 	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
 	
-	Global.dialogs.append_array(["friend",ini_texto,friend_name])
+	Global.dialogs.append(["friend",ini_texto,friend_name])
 	
 func set_dialog_player(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
@@ -49,7 +49,7 @@ func set_dialog_player(txt:String, friend_name:String) -> void:
 	#var friend_attr=portait[friend_name]
 	#friend_sprite.texture=load(friend_attr["res"])
 	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-	Global.dialogs.append_array(["player",ini_texto,friend_name])
+	Global.dialogs.append(["player",ini_texto,friend_name])
 
 func _process(delta:float) -> void:
 	
@@ -66,12 +66,12 @@ func _process(delta:float) -> void:
 			if txtposition<ini_texto.length()+1:
 	
 				#Portait friend
-				print("y:"+str(Global.dialogs[2]))
-				var friend_attr=portait[Global.dialogs[2]]
+				print("y:"+str(Global.dialogs[Global.dialog_idx]))
+				var friend_attr=portait[Global.dialogs[Global.dialog_idx]]
 				friend_sprite.texture=load(friend_attr["res"])
 				friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-				print("X:"+str(Global.dialogs[0][0]))
-				if Global.dialogs[0][0]=="player":
+				#print("X:"+str(Global.dialogs[0][0]))
+				if Global.dialogs[Global.dialog_idx][0]=="player":
 					txtposition=6 # avoid the [left]
 					text.text=""
 					#ini_texto="[left]"+txt
