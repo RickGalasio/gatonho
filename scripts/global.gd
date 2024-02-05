@@ -5,9 +5,11 @@ var input_status = {
 	"plataform": 1,
 	"death": 2,
 }
+
 var input_enable:int=1
 var death:bool=false
 var gamestate=["menu","pause","dialog","fase","bossfight"]
+var igamestate:int=3
 
 # Dialogos
 var dialog_end:bool=false
