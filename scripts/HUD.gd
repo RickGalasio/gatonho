@@ -34,7 +34,7 @@ func set_dialog_friend(txt:String, friend_name:String) -> void:
 	#friend_sprite.texture=load(friend_attr["res"])
 	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
 	
-	Global.dialogs.append(["friend",ini_texto,friend_name])
+	Global.dialogs.append(["friend",txt,friend_name])
 	
 func set_dialog_player(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
@@ -49,7 +49,7 @@ func set_dialog_player(txt:String, friend_name:String) -> void:
 	#var friend_attr=portait[friend_name]
 	#friend_sprite.texture=load(friend_attr["res"])
 	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-	Global.dialogs.append(["player",ini_texto,friend_name])
+	Global.dialogs.append(["player",txt,friend_name])
 
 func _process(delta:float) -> void:
 	
@@ -57,37 +57,22 @@ func _process(delta:float) -> void:
 		txt_time-=delta
 		if txt_time<=0.0: 
 			txt_time=MAX_TXT_TIME
-
-			print("dialog_idx:"+str(Global.dialog_idx))
-			var act_dilogs = Global.dialogs[Global.dialog_idx]
-			print("z:"+str(act_dilogs))
-			var itxt = act_dilogs[1]
-			
-			if txtposition<ini_texto.length()+1:
-	
+			if txtposition<Global.dialogs[Global.dialog_idx][1].length()+1:
 				#Portait friend
-				print("y:"+str(Global.dialogs[Global.dialog_idx]))
-				var friend_attr=portait[Global.dialogs[Global.dialog_idx]]
+				var friend_attr=portait[Global.dialogs[Global.dialog_idx][2]]
 				friend_sprite.texture=load(friend_attr["res"])
 				friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-				#print("X:"+str(Global.dialogs[0][0]))
 				if Global.dialogs[Global.dialog_idx][0]=="player":
-					txtposition=6 # avoid the [left]
-					text.text=""
-					#ini_texto="[left]"+txt
-					#dialog_box.show()
 					player_booble.show()
 					friend_booble.hide()
-				else:
-					txtposition=7 # avoid the [right]
 					text.text=""
-					#ini_texto="[right]"+txt
-					#dialog_box.show()
+					text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
+				elif Global.dialogs[Global.dialog_idx][0]=="friend":
 					player_booble.hide()
 					friend_booble.show()
-					text.text=Global.dialogs[0][1]
-					#text.text=ini_texto.substr(0,txtposition)
+					text.text=""
+					text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
 				txtposition+=1
 			#else:
-				#if Global.dialog_idx+1<Global.dialogs.size():
-					#Global.dialog_idx+=1
+				#text.text=""
+				#txtposition=0

@@ -4,6 +4,9 @@ extends CharacterBody2D
 @onready var camera: Camera2D = $"../../Camera2D"
 @onready var info: RichTextLabel = $info
 @onready var glider_bar: Sprite2D = $glider_bar
+#@onready var hud: CanvasLayer = $HUD
+@onready var text: RichTextLabel = $"../../HUD/screen/dialog_box/text"
+
 
 @onready var init_pos:Vector2=Vector2.ZERO
 
@@ -51,10 +54,6 @@ func set_swin() -> void:
 
 #==========================================================
 func _ready() -> void:
-	#print("XXXXXX")
-	#print("node:"+str(get_node(".").get_path()) )
-	#Calculate the number of frames in glider_bar (44)
-	#GLIDER_BAR_FRAMES=glider_bar.texture.get_size().x/int(glider_bar.region_rect.size.x)
 	GLIDER_BAR_FRAMES=44
 	#print("GLIDER_BAR_FRAMES:"+str(GLIDER_BAR_FRAMES))
 	info.show()
@@ -76,7 +75,7 @@ func input_player(delta:float)->void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	if Input.is_action_just_released("reset"): reset()
 	
-	if Global.get_input_status()==1:
+	if Global.get_input_status()==Global.input_status["plataform"]: # input_status["platform"]==1
 		if anim.get("animation") != "fall":
 			if Input.is_action_just_pressed("dash") and not is_on_floor() and dash_count<max_dashs:
 				dash_time=DASH
@@ -100,12 +99,13 @@ func input_player(delta:float)->void:
 			if Input.is_action_just_pressed("ui_down"): position.y=position.y+1
 			
 			direction = Input.get_axis("ui_left", "ui_right")
-	else:
+	elif Global.get_input_status()==Global.input_status["dialog"]: # input_status["dialog"]==0:
 		if Input.is_action_just_pressed("ui_accept"):
 			Global.dialog_idx+=1
-			#var idialog=Global.dialogs[Global.dialog_idx]
-			#print(idialog)
-			Global.set_input_status("plataform")
+			text.text=""
+			if Global.dialog_idx>=Global.dialogs.size():
+				Global.dialog_idx=0
+				Global.set_input_status("plataform")
 		direction = 0
 		velocity = Vector2i.ZERO
 
