@@ -152,6 +152,8 @@ shape = SubResource("WorldBoundaryShape2D_tdl3q")
 script = ExtResource("6_esv14")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+show_behind_parent = true
+top_level = true
 position = Vector2(-43, -176)
 limit_smoothed = true
 position_smoothing_enabled = true

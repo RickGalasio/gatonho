@@ -24,35 +24,17 @@ func set_dialog_friend(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
 	Global.dialog_end=false
 	Global.set_input_status("dialog")
-	#txtposition=7 # avoid the [right]
-	#text.text=""
-	#ini_texto="[right]"+txt
 	dialog_box.show()
-	#player_booble.hide()
-	#friend_booble.show()
-	#var friend_attr=portait[friend_name]
-	#friend_sprite.texture=load(friend_attr["res"])
-	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-	
 	Global.dialogs.append(["friend",txt,friend_name])
 	
 func set_dialog_player(txt:String, friend_name:String) -> void:
 	#Global.input_enable=Global.input_status["dialog"]
 	Global.dialog_end=false
 	Global.set_input_status("dialog")
-	#txtposition=6 # avoid the [left]
-	#text.text=""
-	#ini_texto="[left]"+txt
 	dialog_box.show()
-	#player_booble.show()
-	#friend_booble.hide()
-	#var friend_attr=portait[friend_name]
-	#friend_sprite.texture=load(friend_attr["res"])
-	#friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
 	Global.dialogs.append(["player",txt,friend_name])
 
 func _process(delta:float) -> void:
-	
 	if dialog_box.visible:
 		txt_time-=delta
 		if txt_time<=0.0: 
@@ -62,17 +44,17 @@ func _process(delta:float) -> void:
 				var friend_attr=portait[Global.dialogs[Global.dialog_idx][2]]
 				friend_sprite.texture=load(friend_attr["res"])
 				friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
+				
 				if Global.dialogs[Global.dialog_idx][0]=="player":
 					player_booble.show()
 					friend_booble.hide()
-					text.text=""
+					#text.text=""
 					text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
+					
 				elif Global.dialogs[Global.dialog_idx][0]=="friend":
 					player_booble.hide()
 					friend_booble.show()
-					text.text=""
+					#text.text=""
 					text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
+					
 				txtposition+=1
-			#else:
-				#text.text=""
-				#txtposition=0

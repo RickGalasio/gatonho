@@ -83,7 +83,6 @@ func input_player(delta:float)->void:
 				dash_count+=1
 			dash_time-=delta
 			if dash_time<=0: dash_time=0
-				
 			if Input.is_action_just_pressed("ui_accept"):
 				jump_buffer=0.1
 			jump_buffer-=delta
