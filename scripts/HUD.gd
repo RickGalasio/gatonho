@@ -16,7 +16,7 @@ var portait = {
 	}
 
 var ini_texto:String = ""
-var txtposition:int=0
+#var txtposition:int=0
 const MAX_TXT_TIME:float = 0.01
 var txt_time:float=MAX_TXT_TIME
 
@@ -35,11 +35,11 @@ func set_dialog_player(txt:String, friend_name:String) -> void:
 	Global.dialogs.append(["player",txt,friend_name])
 
 func _process(delta:float) -> void:
-	if dialog_box.visible:
+	if dialog_box.visible and Global.input_enable == 0:
 		txt_time-=delta
 		if txt_time<=0.0: 
 			txt_time=MAX_TXT_TIME
-			if txtposition<Global.dialogs[Global.dialog_idx][1].length()+1:
+			if Global.txtposition<Global.dialogs[Global.dialog_idx][1].length()+1:
 				#Portait friend
 				var friend_attr=portait[Global.dialogs[Global.dialog_idx][2]]
 				friend_sprite.texture=load(friend_attr["res"])
@@ -49,12 +49,15 @@ func _process(delta:float) -> void:
 					player_booble.show()
 					friend_booble.hide()
 					#text.text=""
-					text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
+					text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
 					
 				elif Global.dialogs[Global.dialog_idx][0]=="friend":
 					player_booble.hide()
 					friend_booble.show()
 					#text.text=""
-					text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,txtposition)
+					text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
 					
-				txtposition+=1
+				Global.txtposition+=1
+			else:
+				Global.txtposition=0
+				Global.set_input_status("dialog pause")

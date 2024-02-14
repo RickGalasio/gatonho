@@ -6,7 +6,7 @@ extends CharacterBody2D
 @onready var glider_bar: Sprite2D = $glider_bar
 #@onready var hud: CanvasLayer = $HUD
 @onready var text: RichTextLabel = $"../../HUD/screen/dialog_box/text"
-
+@onready var dialog_box: NinePatchRect = $"../../HUD/screen/dialog_box"
 
 @onready var init_pos:Vector2=Vector2.ZERO
 
@@ -75,7 +75,7 @@ func input_player(delta:float)->void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	if Input.is_action_just_released("reset"): reset()
 	
-	if Global.get_input_status()==Global.input_status["plataform"]: # input_status["platform"]==1
+	if Global.get_input_status()==Global.input_status["plataform"]:
 		if anim.get("animation") != "fall":
 			if Input.is_action_just_pressed("dash") and not is_on_floor() and dash_count<max_dashs:
 				dash_time=DASH
@@ -98,13 +98,23 @@ func input_player(delta:float)->void:
 			if Input.is_action_just_pressed("ui_down"): position.y=position.y+1
 			
 			direction = Input.get_axis("ui_left", "ui_right")
-	elif Global.get_input_status()==Global.input_status["dialog"]: # input_status["dialog"]==0:
+	elif Global.get_input_status()==Global.input_status["dialog pause"]:
 		if Input.is_action_just_pressed("ui_accept"):
 			Global.dialog_idx+=1
 			text.text=""
+			print("Global.dialog_idx:"+str(Global.dialog_idx))
+			print("Global.dialogs.size():"+str(Global.dialogs.size()))
+			print("Global.get_input_status():"+str(Global.get_input_status() ))
 			if Global.dialog_idx>=Global.dialogs.size():
 				Global.dialog_idx=0
 				Global.set_input_status("plataform")
+				Global.dialogs.clear()
+				dialog_box.hide()
+			else:
+				print("XX")
+				Global.set_input_status("dialog")
+				#Global.dialog_idx+=1
+				Global.txtposition=0
 		direction = 0
 		velocity = Vector2i.ZERO
 
