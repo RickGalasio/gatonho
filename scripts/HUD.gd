@@ -6,8 +6,8 @@ extends CanvasLayer
 @onready var friend_sprite: Sprite2D = $screen/dialog_box/friend/friend_sprite
 @onready var player_sprite: Sprite2D = $screen/dialog_box/player/player_sprite
 
-@onready var player_booble: Sprite2D = $screen/dialog_box/player/player_booble
-@onready var friend_booble: Sprite2D = $screen/dialog_box/friend/friend_booble
+@onready var player_bubble: Sprite2D = $screen/dialog_box/player/player_bubble
+@onready var friend_bubble: Sprite2D = $screen/dialog_box/friend/friend_bubble
 
 var portait = {
 		"tricao": {"res":"res://img/trico.png", "x":0, "y":0, "w":16, "h":16},
@@ -46,14 +46,14 @@ func _process(delta:float) -> void:
 				friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
 				
 				if Global.dialogs[Global.dialog_idx][0]=="player":
-					player_booble.show()
-					friend_booble.hide()
+					player_bubble.show()
+					friend_bubble.hide()
 					#text.text=""
 					text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
 					
 				elif Global.dialogs[Global.dialog_idx][0]=="friend":
-					player_booble.hide()
-					friend_booble.show()
+					player_bubble.hide()
+					friend_bubble.show()
 					#text.text=""
 					text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
 					

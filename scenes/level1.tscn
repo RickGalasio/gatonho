@@ -79,7 +79,7 @@ texture = ExtResource("3_q20x2")
 region_enabled = true
 region_rect = Rect2(-0.00298691, -0.271763, 14.459, 16.8913)
 
-[node name="player_booble" type="Sprite2D" parent="HUD/screen/dialog_box/player"]
+[node name="player_bubble" type="Sprite2D" parent="HUD/screen/dialog_box/player"]
 position = Vector2(44, 20)
 scale = Vector2(2, 2.5)
 texture = ExtResource("4_fw4td")
@@ -107,7 +107,7 @@ texture = ExtResource("3_t1d7d")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16.0002)
 
-[node name="friend_booble" type="Sprite2D" parent="HUD/screen/dialog_box/friend"]
+[node name="friend_bubble" type="Sprite2D" parent="HUD/screen/dialog_box/friend"]
 position = Vector2(-4, 20)
 scale = Vector2(2, 2.5)
 texture = ExtResource("4_fw4td")
