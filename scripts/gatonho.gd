@@ -4,15 +4,14 @@ extends CharacterBody2D
 @onready var camera: Camera2D = $"../../Camera2D"
 @onready var info: RichTextLabel = $info
 @onready var glider_bar: Sprite2D = $glider_bar
-#@onready var hud: CanvasLayer = $HUD
 @onready var text: RichTextLabel = $"../../HUD/screen/dialog_box/text"
 @onready var dialog_box: NinePatchRect = $"../../HUD/screen/dialog_box"
-
 @onready var init_pos:Vector2=Vector2.ZERO
 
-const SPEED = 6000.0
-const JUMP_VELOCITY = -300.0
-const COYOTE_VEL_MAX = 179.0
+const SPEED:float= 6000.0
+const JUMP_VELOCITY:float= -300.0
+const COYOTE_VEL_MAX:float= 179.0
+const DASH:float=0.2
 
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var jump_count:int=0
@@ -20,10 +19,8 @@ var max_jumps:int=1
 var max_dashs:int=1
 
 var direction:float
-#var death:bool=false
 var velmax:float=500.0
 
-const DASH:float=0.2
 var dash_time:float=0.0
 var dash_count:int=0
 
@@ -33,7 +30,7 @@ var GLIDER_BAR_FRAMES:int=0
 
 var last_vel:float=123.0
 var jump_buffer:float=0.0
-var swin:bool = false
+var swin:bool=false
 
 #==========================================================
 func reset() -> void:
@@ -44,8 +41,7 @@ func reset() -> void:
 	position=init_pos+Vector2(0,-1)
 
 #==========================================================
-func set_death() -> void:
-	Global.death=true
+func set_death() -> void: Global.death=true
 
 #==========================================================
 func set_swin() -> void:
@@ -55,7 +51,6 @@ func set_swin() -> void:
 #==========================================================
 func _ready() -> void:
 	GLIDER_BAR_FRAMES=44
-	#print("GLIDER_BAR_FRAMES:"+str(GLIDER_BAR_FRAMES))
 	info.show()
 	glider_bar.show()
 	glider_bar.region_rect=Rect2(0,0,32,8)
@@ -98,7 +93,10 @@ func input_player(delta:float)->void:
 			if Input.is_action_just_pressed("ui_down"): position.y=position.y+1
 			
 			direction = Input.get_axis("ui_left", "ui_right")
+	elif Global.get_input_status()==Global.input_status["dialog"]:
+		direction=0.0
 	elif Global.get_input_status()==Global.input_status["dialog pause"]:
+		direction=0.0
 		if Input.is_action_just_pressed("ui_accept"):
 			Global.dialog_idx+=1
 			text.text=""
@@ -121,9 +119,8 @@ func input_player(delta:float)->void:
 #==========================================================
 func _physics_process(delta) -> void:
 	input_player(delta)
-	
-	# movment====================================
-	# Velocidade terminal
+	# movment ====================================
+ 	# Velocidade terminal
 	if last_vel>velmax and velocity.y==0: set_death()
 
 	# Save CheckPoint
@@ -140,8 +137,7 @@ func _physics_process(delta) -> void:
 			anim.flip_h=true
 	else:
 		velocity.x = 0 
-		#velocity.x = move_toward(velocity.x, 0, SPEED) # 
-	
+
 	if dash_time>0 and dash_count<max_dashs:
 		if anim.flip_h:
 			velocity.x = SPEED * delta * -3
@@ -178,9 +174,8 @@ func _physics_process(delta) -> void:
 		glider_bar.show()
 		dash_count=0
 		disable_glider=false
-	#if velocity.y!=0: print("vel:"+str(velocity.y))
 
-# Animation ======================================================		
+# Animation ======================================================
 	if is_on_floor():
 		jump_count=0
 		if Global.death:
