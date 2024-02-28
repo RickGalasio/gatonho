@@ -1,12 +1,13 @@
 extends Node
 @onready var dialog_box: NinePatchRect = $/root/world/HUD/screen/dialog_box
-var input_status = {
+var input_status_name = {
 	"dialog": 0,
-	"plataform": 1,
+	"platform": 1,
 	"death": 2,
 	"dialog pause": 3,
 }
-var input_enable:int=input_status["plataform"]
+
+var game_status:int=input_status_name["platform"]
 var death:bool=false
 
 # Dialogos
@@ -21,10 +22,10 @@ var portait = {
 	}
 
 func set_input_status(status:String)->void:
-	input_enable=input_status[status]
-	if input_enable == 0:
+	game_status=input_status_name[status]
+	if game_status == input_status_name["platform"]:
 		dialog_box.hide()
 	else:
 		dialog_box.show()
 
-func get_input_status() -> int: return input_enable
+func get_input_status() -> int: return game_status

@@ -70,7 +70,7 @@ func input_player(delta:float)->void:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	if Input.is_action_just_released("reset"): reset()
 	
-	if Global.get_input_status()==Global.input_status["plataform"]:
+	if Global.get_input_status()==Global.input_status_name["platform"]:
 		if anim.get("animation") != "fall":
 			if Input.is_action_just_pressed("dash") and not is_on_floor() and dash_count<max_dashs:
 				dash_time=DASH
@@ -93,23 +93,24 @@ func input_player(delta:float)->void:
 			if Input.is_action_just_pressed("ui_down"): position.y=position.y+1
 			
 			direction = Input.get_axis("ui_left", "ui_right")
-	elif Global.get_input_status()==Global.input_status["dialog"]:
+	elif Global.get_input_status()==Global.input_status_name["dialog"]:
 		direction=0.0
-	elif Global.get_input_status()==Global.input_status["dialog pause"]:
+	elif Global.get_input_status()==Global.input_status_name["dialog pause"]:
 		direction=0.0
 		if Input.is_action_just_pressed("ui_accept"):
-			Global.dialog_idx+=1
-			text.text=""
-			print("Global.dialog_idx:"+str(Global.dialog_idx))
-			print("Global.dialogs.size():"+str(Global.dialogs.size()))
-			print("Global.get_input_status():"+str(Global.get_input_status() ))
+
 			if Global.dialog_idx>=Global.dialogs.size():
 				Global.dialog_idx=0
-				Global.set_input_status("plataform")
+				Global.set_input_status("platform")
 				Global.dialogs.clear()
 				dialog_box.hide()
 			else:
-				print("XX")
+				print("TAMANHO DIALOGS:"+str(Global.dialogs.size()))
+				print("Global.dialog_idx:"+str(Global.dialog_idx))
+				#if Global.dialogs.size()+1<Global.dialog_idx:
+				Global.dialog_idx+=1
+				text.text=""
+				print("XX:"+str(Global.get_input_status()))
 				Global.set_input_status("dialog")
 				#Global.dialog_idx+=1
 				Global.txtposition=0
@@ -192,10 +193,10 @@ func _physics_process(delta) -> void:
 			anim.play("glider")
 		else:
 			anim.play("idle")
-			
 	last_vel=velocity.y
 	move_and_slide()
 
 func _on_area_gatonho_body_entered(body: Node2D) -> void:
 	#print("Body:"+str(body.get_index(true)))
 	pass
+	
