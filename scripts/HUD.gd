@@ -41,24 +41,31 @@ func _process(delta:float) -> void:
 			txt_time-=delta
 			if txt_time<=0.0: 
 				txt_time=MAX_TXT_TIME
+				#print(Global.dialogs.size())
+				#print(Global.dialog_idx)
+				if Global.dialog_idx>=Global.dialogs.size():
+					Global.dialog_idx=0
+					Global.set_input_status("platform")
+					Global.dialogs.clear()
+					return
 				if Global.txtposition<=Global.dialogs[Global.dialog_idx][1].length():
-					#Portait friend
-					var friend_attr=portait[Global.dialogs[Global.dialog_idx][2]]
-					friend_sprite.texture=load(friend_attr["res"])
-					friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
-					if Global.dialogs[Global.dialog_idx][0]=="player":
-						player_bubble.show()
-						friend_bubble.hide()
-						#text.text=""
-						text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
-						print(text.text)
-					elif Global.dialogs[Global.dialog_idx][0]=="friend":
-						player_bubble.hide()
-						friend_bubble.show()
-						#text.text=""
-						text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
-						print(text.text)
-					Global.txtposition+=1
+						#Portait friend
+						var friend_attr=portait[Global.dialogs[Global.dialog_idx][2]]
+						friend_sprite.texture=load(friend_attr["res"])
+						friend_sprite.region_rect=Rect2(Vector2(friend_attr["x"], friend_attr["y"]), Vector2(friend_attr["w"], friend_attr["h"]) )
+						if Global.dialogs[Global.dialog_idx][0]=="player":
+							player_bubble.show()
+							friend_bubble.hide()
+							#text.text=""
+							text.text="[left]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
+							#print(text.text)
+						elif Global.dialogs[Global.dialog_idx][0]=="friend":
+							player_bubble.hide()
+							friend_bubble.show()
+							#text.text=""
+							text.text="[right]"+Global.dialogs[Global.dialog_idx][1].substr(0,Global.txtposition)
+							#print(text.text)
+						Global.txtposition+=1
 				else:
 					Global.txtposition=0
 					Global.set_input_status("dialog pause")

@@ -508,7 +508,7 @@ texture = ExtResource("4_82a2t")
 [node name="gaveta" type="Timer" parent="."]
 
 [node name="trico" parent="." instance=ExtResource("5_p4ifo")]
-position = Vector2(-243, -264)
+position = Vector2(73, -154)
 
 [node name="ratôncio" parent="." instance=ExtResource("6_v2k5u")]
 position = Vector2(-313, -285)

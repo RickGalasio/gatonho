@@ -47,8 +47,20 @@ func _on_gaveta_timeout() -> void:
 	pass
 
 func dialogo_deprimido(area: Area2D) -> void:
-	hud.set_dialog_friend("Não chega perto Gatoncio!\nEu já decidi...","ratoncio")
-	hud.set_dialog_player("Elas não iriam quere isso.","ratoncio")
+	hud.set_dialog_friend("Não chega perto Gatonho!\nEu já decidi...","ratoncio")
+	hud.set_dialog_player("Elas não iriam querer isso.","ratoncio")
 	hud.set_dialog_friend("Elas eram a minha vida,\nnão me resta nada.","ratoncio")
-	hud.set_dialog_player("Não é Gatôncio, é Gatonho!","ratoncio")
-
+	hud.set_dialog_player("Resta o amor da vida delas, resta você.","ratoncio")
+	hud.set_dialog_player("A gente só morre quando esquecem da gente.","ratoncio")
+	hud.set_dialog_player("Mantenha sua família viva em você.","ratoncio")
+	hud.set_dialog_friend("Foi tudo culpa minha, eu que estava dirigindo.","ratoncio")
+	hud.set_dialog_friend("Minha filhinha, minha mulher. Eu falhei com elas.","ratoncio")
+	hud.set_dialog_player("Aquele acidente não foi de propósito.","ratoncio")
+	hud.set_dialog_player("Se uma delas sobrevivesse, você iria querer\nque ela continuasse viva.","ratoncio")
+	hud.set_dialog_player("Elas iriam querer o mesmo por você","ratoncio")
+	hud.set_dialog_friend("Eu causei a morte delas e agora\nestou preso nessa cadeira de rodas.","ratoncio")
+	hud.set_dialog_player("Você está nessa cadeira de roas.","ratoncio")
+	hud.set_dialog_player("Mas você não está preso.","ratoncio")
+	hud.set_dialog_player("Venha comigo e eu vou te mostrar\nque sua família continua viva em você.","ratoncio")
+	hud.set_dialog_player("E vou provar que nada pode te prender.","ratoncio")
+	

@@ -15,6 +15,7 @@ func _ready() -> void:
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	hud.set_dialog_friend("Oi Gatonho!\nQuer café?","tricao")
+	hud.set_dialog_player("Oi Tricão!\nQuero não, valeu!","tricao")
 
 func _on_area_2d_area_exited(area: Area2D) -> void:
 	pass
