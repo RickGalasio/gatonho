@@ -105,14 +105,9 @@ func input_player(delta:float)->void:
 				Global.dialogs.clear()
 				dialog_box.hide()
 			else:
-				print("TAMANHO DIALOGS:"+str(Global.dialogs.size()))
-				print("Global.dialog_idx:"+str(Global.dialog_idx))
-				#if Global.dialogs.size()+1<Global.dialog_idx:
 				Global.dialog_idx+=1
 				text.text=""
-				print("XX:"+str(Global.get_input_status()))
 				Global.set_input_status("dialog")
-				#Global.dialog_idx+=1
 				Global.txtposition=0
 		direction = 0
 		velocity = Vector2i.ZERO
@@ -197,6 +192,5 @@ func _physics_process(delta) -> void:
 	move_and_slide()
 
 func _on_area_gatonho_body_entered(body: Node2D) -> void:
-	#print("Body:"+str(body.get_index(true)))
 	pass
 	
