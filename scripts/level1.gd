@@ -3,7 +3,7 @@ extends TileMap
 @onready var level_1: TileMap = $"."
 @onready var spike:= preload("res://scenes/spike.tscn")
 @onready var player:= preload("res://scenes/gatonho.tscn")
-@onready var gaveta: Timer = $gaveta
+#@onready var gaveta: Timer = $gaveta
 @onready var trico: Node2D = $trico
 @onready var hud: CanvasLayer = get_node("/root/world/HUD")
 
@@ -11,8 +11,8 @@ var ispike
 var iplayer
 
 func _ready() -> void:
-	gaveta.wait_time==0.3
-	gaveta.start()
+	#gaveta.wait_time==0.3
+	#gaveta.start()
 	await level_1.draw # Await draw the tiles
 	#print("=========================\\")
 	#for x in range(0.0,200.0):

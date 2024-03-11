@@ -1,5 +1,5 @@
 extends Node2D
-@onready var level:int=1
+@onready var level:int=2
 @onready var gatonho: CharacterBody2D = %Gatonho
 
 func _ready() -> void:

@@ -12,6 +12,7 @@ extends CanvasLayer
 var portait = {
 		"tricao": {"res":"res://img/trico.png", "x":0, "y":0, "w":16, "h":16},
 		"ratoncio": {"res":"res://img/Ratôncio.png", "x":0, "y":0, "w":16, "h":16},
+		"koguh": {"res":"res://img/koguh.png", "x":0, "y":0, "w":16, "h":16},
 		"": "",
 	}
 
