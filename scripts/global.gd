@@ -16,10 +16,7 @@ var dialogs:Array
 var dialog_idx:int=0
 var txtposition:int=0
 
-var portait = {
-		"tricao": {"res":"res://img/trico.png", "x":0, "y":0, "w":16, "h":16},
-		"ratoncio": {"res":"res://img/trico.png", "x":0, "y":0, "w":16, "h":16},
-	}
+var dialog_koguh:bool=true
 
 func set_input_status(status:String)->void:
 	game_status=input_status_name[status]

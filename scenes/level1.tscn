@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b7pbq0i4d4a7u"]
+[gd_scene load_steps=14 format=3 uid="uid://b7pbq0i4d4a7u"]
 
 [ext_resource type="Script" path="res://scripts/HUD.gd" id="1_582wg"]
 [ext_resource type="Script" path="res://scripts/load_fase.gd" id="1_cspt5"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://c6ixqrfa4gmmv" path="res://img/bobble.png" id="4_fw4td"]
 [ext_resource type="FontFile" uid="uid://be8r8cl5bovx" path="res://fonts/clacon.ttf" id="5_jj0eq"]
 [ext_resource type="Script" path="res://scripts/world_limits.gd" id="6_esv14"]
+[ext_resource type="Script" path="res://scripts/iten_detail.gd" id="7_brhwu"]
+[ext_resource type="Texture2D" uid="uid://ce31rebehfga2" path="res://img/chinela.png" id="7_lb8w2"]
+[ext_resource type="FontFile" uid="uid://bkq65cnlyjqfy" path="res://fonts/8bitOperatorPlus8-Bold.ttf" id="8_aykix"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_14o5o"]
 
@@ -140,6 +143,38 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="iten_detail" type="NinePatchRect" parent="HUD/screen"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -41.5
+offset_right = 41.5
+offset_bottom = 84.0
+grow_horizontal = 2
+texture = ExtResource("2_uebg4")
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+script = ExtResource("7_brhwu")
+
+[node name="iten" type="Sprite2D" parent="HUD/screen/iten_detail"]
+position = Vector2(42, 47)
+scale = Vector2(4, 4)
+texture = ExtResource("7_lb8w2")
+
+[node name="name_iten" type="RichTextLabel" parent="HUD/screen/iten_detail"]
+layout_mode = 0
+offset_left = 3.5
+offset_top = 4.0
+offset_right = 81.5
+offset_bottom = 30.0
+theme_override_fonts/normal_font = ExtResource("8_aykix")
+bbcode_enabled = true
+text = "[center]Chinela"
 
 [node name="fase" type="Node2D" parent="."]
 script = ExtResource("1_cspt5")
